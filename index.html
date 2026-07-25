@@ -225,9 +225,8 @@ const BUZZ = [
 ];
 
 const PAREN=[
-  "עשית משהו מצחיק: כתבת מילה באנגלית, ואז בסוגריים תרגמת אותה לעברית. זה היבריש, נשמה. אם אתה מתרגם בעצמך, תכתוב ישר בשפה אחת. <b>תשאיר את הסוגריים, תמחק את השאר.</b>",
-  "שוב מילה באנגלית עם תרגום בסוגריים. אם אתה כבר מתרגם, פשוט תכתוב מראש בעברית ותחסוך לי את הריצה.",
-  "אנגלית ואז תרגום בסוגריים, שוב. זה כמו לבשל טעים ואז לשפוך מים. <b>שפה אחת, תבחר.</b>"
+  "כתבת מילה ואז תרגמת אותה בסוגריים באותה שורה. זה כפול ומיותר, תבחרי גרסה אחת.",
+  "מילה ותרגום שלה בסוגריים זה חוזר על עצמו. תשאירי אחת, זה יזרום טוב יותר."
 ];
 const THREADS=[
   "את ה🧵 וה'מי שמבין יבין' תוריד. זה לא סוד, זה פוסט.",
@@ -242,7 +241,7 @@ const NAMES=[
   "אתה מתחיל לזרוק שמות. אחד-שניים בסדר, יותר מזה ואתה נשמע מתרברב במקום משכנע.",
   "עוד שם גדול. תיזהר, נשמה, שלא תישמע כאילו אתה מנסה להרשים במקום לספר."
 ];
-const BUZZTAIL=[" עזוב אותי מההיבריש."," תגיד את זה בשפה אחת."," במילים של בן אדם, בבקשה."];
+const BUZZTAIL=[" תגיד את זה במילים של בן אדם."," מה זו המילה הגדולה הזאת?"," דברי פשוט, יישמע חכם יותר."];
 const HEBRISH=[
   "<b>עזוב אותי מההיבריש.</b> חצי עברית חצי אנגלית באותה שורה, תחליט על שפה אחת. או הכל עברית או הכל אנגלית, לא סלט.",
   "שוב היבריש. אתה מזגזג בין השפות באמצע משפט וזה מבלבל. תבחר אחת ותישאר בה.",
@@ -371,13 +370,11 @@ function noteFor(line, ctx){
   if(/in the comments|comment below|drop[^.]*comment|tag (someone|a friend|@)|בתגובות|תייגו/i.test(L)) return {tag:'warn', note:pick(CTABAIT)};
 
   if(ctx.lang==='he'){
-    // Hebrew post: police Hebrish (mixing), never English by itself
-    if(hasParen && latinAll.length>0) return {tag:'bad', note:pick(PAREN)};
+    // Hebrish (English terms mixed into Hebrew) is normal in Israeli writing. Don't flag it.
+    // Only note a redundant self-translation-in-parentheses, once, lightly.
+    if(!ctx.parenUsed && hasParen && latinAll.length>0){ ctx.parenUsed=true; return {tag:'warn', note:pick(PAREN)}; }
     if(NAMEDROP.test(L)) return {tag:'warn', note:pick(NAMES)};
-    if(nonBrand.length>=2) return {tag:'bad', note:pick(HEBRISH)};
-    if(nonBrand.length===1) return {tag:'warn', note:pick(SOMEMIX)};
   } else {
-    // English post: Savta knows English, judge clarity only
     if(NAMEDROP.test(L)) return {tag:'warn', note:pick(NAMES)};
   }
 
@@ -393,7 +390,7 @@ function analyze(text){
   const Lat=(t.match(/[A-Za-z]/g)||[]).length;
   const lang = H < Lat*0.35 ? 'en' : 'he';
   const lines=splitLines(t);
-  const ctx={idx:0, hookUsed:false, human:0, clean:0, lang, total:lines.length};
+  const ctx={idx:0, hookUsed:false, human:0, clean:0, parenUsed:false, lang, total:lines.length};
   const rows=[];
   lines.forEach((ln,i)=>{
     ctx.idx=i;
@@ -416,7 +413,7 @@ function analyze(text){
     else sum="יש פה גרעין טוב, רק צריך לנקות קצת.";
   } else {
     opener = `תשמע חביבי, ${reads}`;
-    if(badN>=3) sum="יש פה פוסט חכם, אבל איבדת אותי בהיבריש כמה פעמים.";
+    if(badN>=3) sum="יש פה פוסט חכם, אבל יש כמה דברים שצריך לתקן. בוא נעבור עליהם.";
     else if(badN===0) sum="ויא בינתי, הבנתי, כתוב יפה. אבל אל תתלהב, יש כמה שורות לחדד. בוא נעבור עליהן.";
     else sum="יש פה גרעין ממש טוב, רק חבל שהוא קצת מתחבא.";
   }
