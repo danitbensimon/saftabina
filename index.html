@@ -336,6 +336,12 @@ const CTABAIT=[
   "זה קצת דיג לתגובות. אם הפוסט טוב, אנשים יגיבו לבד, נשמה.",
   "'תכתבו בתגובות'? חמוד, אל תתחנן לתגובות. תן ערך והם יבואו."
 ];
+const DRY=[
+  "ודבר אחרון, וזה הכי חשוב: הפוסט הזה יבש. יבש כמו טוסט בלי חמאה. סיפרת לי עובדות, אבל לא סיפרת לי אותך. איפה את בכל זה? תני לי רגע אחד אמיתי מהחיים, אחרת אף אחד לא יזכור מזה כלום.",
+  "הכל פה נכון, אבל אין לב. זה קורא כמו דוח, לא כמו בן אדם. תוסיפי רגש אחד אמיתי, סיפור קטן, משהו שכואב או משמח, אחרת זה יגלוש ויישכח.",
+  "נשמה, זה מדויק אבל קר. לא הרגשתי כלום כשקראתי. פוסט בלי רגש זה כמו אוכל בלי מלח, אפשר לאכול, אבל למי בא?"
+];
+const EMO=/רגש|בלב|ללב|מהלב|בכי|דמע|כאב|מפחיד|אהב|שמח|געגוע|סבתא|אמא|אבא|ילד|חלום|בושה|גאו|פספס|למדתי|נשבר|צחוק|כעס|בדידות|תקוו|heart|cried|fear|love|miss|dream|ashamed|proud|failed|learned|broke|lonely|hope/i;
 
 function cleanNote(L, ctx, isFirst, isLast){
   const len=L.length;
@@ -395,6 +401,8 @@ function analyze(text){
     if(n) rows.push({line:ln, tag:n.tag, note:n.note});
   });
   const kept=rows.slice(0,12);
+  const dry = t.length>150 && !EMO.test(t);
+  if(dry) kept.push({line:"כל הפוסט", tag:'bad', note:pick(DRY)});
   const badN=kept.filter(r=>r.tag==='bad').length;
   const warnN=kept.filter(r=>r.tag==='warn').length;
   const goodN=kept.filter(r=>r.tag==='good').length;
