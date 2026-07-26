@@ -42,7 +42,7 @@
   h1{font-size:clamp(46px,10vw,108px);font-weight:900;letter-spacing:-2px;line-height:.95}
   h1 .ai{position:relative;display:inline-block;background:var(--ink);color:var(--yellow);padding:0 8px}
   .tag{font-size:clamp(20px,3.1vw,30px);font-weight:800;margin-top:18px;max-width:720px;margin-inline:auto}
-  .pun{margin-top:14px;font-size:clamp(15px,1.7vw,18px);font-weight:600;opacity:.85;max-width:720px;margin-inline:auto}
+  .pun{margin-top:16px;font-size:clamp(17px,2.1vw,22px);font-weight:600;opacity:.9;max-width:760px;margin-inline:auto}
   .pun b{background:#fff;border:2px solid var(--ink);padding:1px 6px}
   .savta-img{position:absolute;left:50%;bottom:calc(100% - 6px);transform:translateX(-50%);
     width:100%;height:auto;display:block;
@@ -440,37 +440,59 @@ const LINKRE=/לינק|link|הרשמה|כרטיס/i;
 const LESSON=/למדתי|לימד(ה|ו)? אותי|התובנה|גיליתי|הבנתי ש|מה שלמדתי/;
 const ANNOUNCE=/משיקים|השקנו|יוצא לדרך|גייסנו|מצטרפת|מצטרף|עוברת ל|עובר ל|פותחת|פותח|החלטתי לעשות/;
 
-function gist(lines){
-  const text=lines.join(' ');
+/* מילים שאין להן משמעות בפני עצמן ולכן לא מעידות על נושא הפוסט */
+const STOP=new Set(("של את זה עם אני אתה את אתם אנחנו הוא היא הם הן על כי אם לא גם רק כל מה כמו אבל אז יש אין "
++"אחרי לפני מאוד יותר עוד ככה שם פה כאן ואז או הכי בין תוך היה היו להיות אותו אותה אותי אותם אתכם להם שלי שלך "
++"שלנו שלהם וגם עד מתוך אצל בגלל דרך לגבי לפי כדי אשר כאשר כש היום אמש אתמול מחר עכשיו כבר ממש כמה איזה הרבה "
++"פשוט בעצם בדיוק לגמרי אפילו למה איך מתי איפה מי שזה שאני שלא שהוא וזה זו זאת אלה אלו הזה הזאת האלה כן טוב "
++"רוצה רוצים צריך צריכה יכול יכולה עשיתי עושה עשה להגיד לומר אמר אמרה אמרתי").split(/\s+/));
 
-  // הזמנה לאירוע: יום, שעה ומקום גוברים על כל השאר
+const words = s => (plainify(s).match(/[א-תA-Za-z'׳]{3,}/g)||[]);
+const stem = w => w.replace(/^[והבלמש]/,'').slice(0,4);
+const bare = w => w.replace(/^ה(?=[א-ת]{3,})/,'');
+
+/* המשפט שנושא את רוב המשקל של הפוסט, לא הקצר ביותר ולא הקריאה לפעולה */
+function central(lines, ask){
+  const freq={};
+  lines.forEach(l=>words(l).forEach(w0=>{
+    const w=bare(w0); if(STOP.has(w)) return;
+    const k=stem(w); freq[k]=(freq[k]||0)+1;
+  }));
+  let best="", bs=-1;
+  lines.forEach(l=>{
+    if(ask && CTARE.test(l)) return;
+    const ws=words(l).map(bare).filter(w=>!STOP.has(w));
+    if(ws.length<3) return;
+    const sc=ws.reduce((a,w)=>a+(freq[stem(w)]||0),0)/Math.sqrt(ws.length);
+    if(sc>bs){ bs=sc; best=l; }
+  });
+  return best||lines[0]||"";
+}
+
+/* מה מבקשים בפוסט, כמשפט משלים ולא כסיכום עצמו */
+function askClause(text){
   const dayM=text.match(DAYRE), timeM=text.match(TIMERE), cityM=text.match(CITYRE), evM=text.match(EVENTWORD);
   if((dayM||timeM) && (evM||LINKRE.test(text))){
     const what=evM?evM[1]:"אירוע";
     const day=dayM?(dayM[1]||dayM[2]):"";
     let when=day?`ביום ${day}`:"";
     if(timeM) when+=(when?" בשעה ":"בשעה ")+timeM[0];
-    const where=cityM?` ב${cityM[1]}`:"";
-    const how=LINKRE.test(text) ? "ומי שרוצה להגיע שיגיב ואת תשלחי לינק." : "ומי שרוצה להגיע שיכתוב לך.";
-    return `הבנתי שיש לך ${what} ${when}${where}, ${how}`.replace(/\s{2,}/g," ");
+    return `ובסוף את מזמינה ל${what} ${when}${cityM?` ב${cityM[1]}`:""}`.replace(/\s{2,}/g," ").trim();
   }
+  if(COFFEE.test(text) && CTARE.test(text)) return "ובסוף את מזמינה אנשים לקפה";
+  if(CTARE.test(text)) return "ובסוף את מבקשת שיכתבו לך";
+  return "";
+}
 
-  const aud=text.match(/אם א(?:תם|תן|ת|תה)\s+([^,.\n!?]{3,45})/);
-  if(aud && (CTARE.test(text) || COFFEE.test(text))){
-    const who=plainify(aud[1]).replace(/\s+/g,' ').trim();
-    return COFFEE.test(text)
-      ? `הבנתי שאת מזמינה ${who} לשבת איתך על קפה, ומי שרוצה שיכתוב לך.`
-      : `הבנתי שאת מחפשת ${who} שיכתבו לך.`;
-  }
-  if(COFFEE.test(text) && CTARE.test(text)) return "הבנתי שאת מזמינה אנשים לקפה, ומי שרוצה שיכתוב לך.";
-  const les=lines.find(l=>LESSON.test(l));
-  if(les) return `הבנתי שהעיקר פה: ${trimTo(binaVoice(les),80)}`;
-  const ann=lines.find(l=>ANNOUNCE.test(l));
-  if(ann) return `הבנתי שיש לך חדשות: ${trimTo(binaVoice(ann),80)}`;
-  const meaty=lines.map(l=>binaVoice(l)).filter(p=>p.length>14);
-  if(!meaty.length) return "";
-  const best=meaty.slice().sort((a,b)=>a.length-b.length).find(p=>p.length>=25)||meaty[0];
-  return `בקיצור, ${trimTo(best,80)}`;
+function gist(lines){
+  const text=lines.join(' ');
+  const ask=askClause(text);
+
+  // המשפט שנושא את הפוסט, ואם יש בו לקח אז הלקח קודם
+  const core=lines.find(l=>LESSON.test(l)) || central(lines, ask);
+  if(!core) return ask ? ask.replace(/^ובסוף /,"הבנתי ש")+"." : "";
+  const head=`בקיצור, ${trimTo(binaVoice(core),80)}`.replace(/[.,]$/,"");
+  return ask ? `${head}, ${ask}.` : `${head}.`;
 }
 
 function grasp(lines){
