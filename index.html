@@ -431,20 +431,38 @@ function clarity(L){
 
 /* היא לא מצטטת אותך בחזרה, היא אומרת במשפט אחד מה יצא לה מזה */
 const CTARE=/תכתבו|כתבו לי|שלחו|הודעה|תגיבו|הגיבו|בואו נקבע|נקבע|shoot me|comment|message|DM/i;
-const MEETRE=/קפה|להיפגש|נפגש|פגישה|coffee|meet/i;
+const COFFEE=/קפה|coffee/i;   /* "נפגש" לבד זה לא קפה, זה כל דבר */
+const EVENTWORD=/(פודקאסט|וובינר|מיטאפ|כנס|סדנה|סדנת|הרצאה|מפגש|אירוע|מסיבה|לייב)/;
+const DAYRE=/(?:יום\s+(ראשון|שני|שלישי|רביעי|חמישי|שישי|שבת)|(?:^|\s)(ראשון|שני|שלישי|רביעי|חמישי|שישי)\s+ה?\s?קרוב)/;
+const TIMERE=/\b([01]?\d|2[0-3])[:.][0-5]\d\b/;
+const CITYRE=/(תל אביב|ת"א|ירושלים|חיפה|הרצליה|רמת גן|באר שבע|רעננה|נתניה|פתח תקווה|זום)/i;
+const LINKRE=/לינק|link|הרשמה|כרטיס/i;
 const LESSON=/למדתי|לימד(ה|ו)? אותי|התובנה|גיליתי|הבנתי ש|מה שלמדתי/;
 const ANNOUNCE=/משיקים|השקנו|יוצא לדרך|גייסנו|מצטרפת|מצטרף|עוברת ל|עובר ל|פותחת|פותח|החלטתי לעשות/;
 
 function gist(lines){
   const text=lines.join(' ');
+
+  // הזמנה לאירוע: יום, שעה ומקום גוברים על כל השאר
+  const dayM=text.match(DAYRE), timeM=text.match(TIMERE), cityM=text.match(CITYRE), evM=text.match(EVENTWORD);
+  if((dayM||timeM) && (evM||LINKRE.test(text))){
+    const what=evM?evM[1]:"אירוע";
+    const day=dayM?(dayM[1]||dayM[2]):"";
+    let when=day?`ביום ${day}`:"";
+    if(timeM) when+=(when?" בשעה ":"בשעה ")+timeM[0];
+    const where=cityM?` ב${cityM[1]}`:"";
+    const how=LINKRE.test(text) ? "ומי שרוצה להגיע שיגיב ואת תשלחי לינק." : "ומי שרוצה להגיע שיכתוב לך.";
+    return `הבנתי שיש לך ${what} ${when}${where}, ${how}`.replace(/\s{2,}/g," ");
+  }
+
   const aud=text.match(/אם א(?:תם|תן|ת|תה)\s+([^,.\n!?]{3,45})/);
-  if(aud && (CTARE.test(text) || MEETRE.test(text))){
+  if(aud && (CTARE.test(text) || COFFEE.test(text))){
     const who=plainify(aud[1]).replace(/\s+/g,' ').trim();
-    return MEETRE.test(text)
+    return COFFEE.test(text)
       ? `הבנתי שאת מזמינה ${who} לשבת איתך על קפה, ומי שרוצה שיכתוב לך.`
       : `הבנתי שאת מחפשת ${who} שיכתבו לך.`;
   }
-  if(MEETRE.test(text) && CTARE.test(text)) return "הבנתי שאת מזמינה אנשים לקפה, ומי שרוצה שיכתוב לך.";
+  if(COFFEE.test(text) && CTARE.test(text)) return "הבנתי שאת מזמינה אנשים לקפה, ומי שרוצה שיכתוב לך.";
   const les=lines.find(l=>LESSON.test(l));
   if(les) return `הבנתי שהעיקר פה: ${trimTo(binaVoice(les),80)}`;
   const ann=lines.find(l=>ANNOUNCE.test(l));
