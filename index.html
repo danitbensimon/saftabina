@@ -22,12 +22,12 @@
     line-height:1.5;
     padding:0 0 80px;
   }
-  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
   header{
     position:relative;
     background:var(--yellow);
     border-bottom:var(--border);
-    padding:clamp(120px,27vw,215px) 20px 30px;
+    padding:clamp(120px,24vw,250px) 24px 34px;
     margin-bottom:0;
   }
   .badge{
@@ -36,24 +36,24 @@
     font-weight:800;font-size:13px;padding:5px 12px;border-radius:999px;
     letter-spacing:.5px;
   }
-  h1{font-size:clamp(42px,9vw,84px);font-weight:900;letter-spacing:-2px;line-height:.95}
+  h1{font-size:clamp(46px,10vw,108px);font-weight:900;letter-spacing:-2px;line-height:.95}
   h1 .ai{position:relative;display:inline-block;background:var(--ink);color:var(--yellow);padding:0 8px}
-  .tag{font-size:clamp(18px,3.4vw,24px);font-weight:800;margin-top:16px;max-width:640px}
-  .pun{margin-top:14px;font-size:15px;font-weight:600;opacity:.85;max-width:640px}
+  .tag{font-size:clamp(19px,3vw,28px);font-weight:800;margin-top:18px;max-width:720px}
+  .pun{margin-top:14px;font-size:clamp(15px,1.7vw,17px);font-weight:600;opacity:.85;max-width:720px}
   .pun b{background:#fff;border:2px solid var(--ink);padding:1px 6px}
   .savta-img{position:absolute;left:50%;bottom:calc(100% - 6px);transform:translateX(-50%);
     width:100%;height:auto;display:block;
     filter:drop-shadow(3px 3px 0 rgba(0,0,0,.25))}
 
   section{margin-top:40px}
-  .kicker{font-weight:900;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:inline-block;background:var(--ink);color:#fff;padding:4px 10px}
+  .kicker{font-weight:900;font-size:clamp(15px,1.8vw,18px);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;display:inline-block;background:var(--ink);color:#fff;padding:5px 12px}
 
   .demo{
     background:#fff;border:var(--border);
     box-shadow:10px 10px 0 var(--ink);
     padding:22px;
   }
-  .demo h2{font-size:26px;font-weight:900;margin-bottom:6px}
+  .demo h2{font-size:clamp(30px,4.6vw,42px);font-weight:900;margin-bottom:8px;line-height:1.05}
   .demo p.sub{font-size:15px;font-weight:600;opacity:.8;margin-bottom:16px}
   .demo-head{display:flex;align-items:flex-end;gap:14px;justify-content:space-between}
   .demo-head .txt{flex:1}
@@ -85,7 +85,7 @@
   @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   .review .head{display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;padding:12px 16px}
   .review .head .av{width:38px;height:38px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-size:22px}
-  .review .head b{font-size:17px}
+  .review .head b{font-size:clamp(19px,2.6vw,24px)}
   .review .body{padding:18px}
   .review .body p{font-size:17px;margin-bottom:10px}
   .verdict{font-weight:900;font-size:20px;padding:12px 16px;border-top:3px solid var(--ink);text-align:center}
@@ -100,6 +100,7 @@
   .card .said b{background:var(--yellow);padding:0 4px}
   .vt{display:inline-block;font-weight:900;margin-top:10px;padding:3px 10px;border:2px solid var(--ink)}
   .vt.no{background:var(--red);color:#fff}.vt.pub{background:var(--green);color:#fff}.vt.fix{background:var(--yellow)}
+  .vemoji{display:inline-block;background:var(--ink);color:#fff;border-radius:6px;padding:0 6px;margin-left:6px;line-height:1.4}
 
   footer{margin-top:56px;border-top:var(--border);padding-top:20px;font-size:14px;font-weight:600;opacity:.8;text-align:center}
   footer .dis{background:var(--ink);color:var(--paper);display:inline-block;padding:8px 14px;font-weight:800;margin-top:10px}
@@ -159,14 +160,14 @@
     <span class="kicker">ככה זה נראה</span>
     <div class="ex">
       <div class="card">
-        <div class="post">"אתמול הכלב שלי ברח. חיפשתי 3 שעות. וזה לימד אותי משהו עמוק על retention. Churn זה לא מטריקה, זה סטייט אוף מיינד. מי שמבין יבין 🧵♻️"</div>
-        <div class="said">"תשמע חביבי, קראתי פעמיים. הבנתי שהכלב ברח, מסכן, מצאת אותו? אבל מה זה <b>'צ'רן'</b>, זה מרק? עזוב אותי מההיבריש. סיפרת סיפור יפה על הכלב ופתאום אתה מדבר כאילו מוכר לי ביטוח. את הסמל של המחזור תוריד, זה לא כביסה."</div>
-        <span class="vt no">❌ אל תפרסם</span>
+        <div class="post">"הכלב שלי ברח אתמול. חיפשתי 3 שעות. וזה לימד אותי משהו עמוק על retention. Churn זה לא מטריקה, זה סטייט אוף מיינד. מי שמבין יבין 🧵♻️"</div>
+        <div class="said">"תשמעי חביבתי, קראתי פעמיים. הבנתי שהכלב ברח, מסכן, מצאת אותו? אבל מה זה <b>'צ'רן'</b>, זה מרק? סיפרת סיפור יפה על הכלב, ופתאום את מדברת כאילו מוכרת לי ביטוח. תחליטי, או הכלב או הסטארטאפ. ואת הסמל של המחזור תורידי, זה לא כביסה."</div>
+        <span class="vt no"><span class="vemoji">❌</span>אל תפרסמי</span>
       </div>
       <div class="card">
         <div class="post">"פיטרתי לקוח היום. שילם טוב, אבל כל שיחה איתו הרגישה כמו עונש. לקח לי שנתיים להבין שכסף שבא עם לחץ הוא לא באמת רווח."</div>
         <div class="said">"אה, את זה הבנתי מהמילה הראשונה עד האחרונה. פיטרת אותו כי עשה לך רע בלב, גם אם שילם, יא בינתי, לא כל כסף שווה את זה. כתבת כמו בן אדם, לא כמו רובוט. <b>מברוכ.</b>"</div>
-        <span class="vt pub">✅ תפרסם</span>
+        <span class="vt pub"><span class="vemoji">✅</span>תפרסמי</span>
       </div>
     </div>
   </section>
@@ -215,12 +216,12 @@ JPMorgan מזהירה שהשבועות הקרובים קריטיים. MarketWatc
 const BUZZ = [
   {re:/synergy|סינרג/i, q:"מה זה <b>'סינרגיה'</b>? זה סוג של סלט?"},
   {re:/leverage|לוורג'?/i, q:"<b>'לוורג''</b>, זה בעברית או שהמצאת?"},
-  {re:/disrupt|דיסראפ/i, q:"<b>'דיסראפט'</b>, יא בני? אתה משבש או מסדר, תחליט."},
-  {re:/ecosystem|אקוסיסט/i, q:"<b>'אקוסיסטם'</b> זה כמו אקווריום? עזוב אותי."},
-  {re:/mindset|מיינדסט/i, q:"'מיינדסט', 'סטייט אוף מיינד'... נשמה, תגיד ראש, זה מספיק."},
+  {re:/disrupt|דיסראפ/i, q:"<b>'דיסראפט'</b>, יא בינתי? את משבשת או מסדרת, תחליטי."},
+  {re:/ecosystem|אקוסיסט/i, q:"<b>'אקוסיסטם'</b> זה כמו אקווריום? עזבי אותי."},
+  {re:/mindset|מיינדסט/i, q:"'מיינדסט', 'סטייט אוף מיינד'... נשמה, תגידי ראש, זה מספיק."},
   {re:/retention|churn|צ'רן|ריטנשן/i, q:"מה זה <b>'צ'רן'</b>, זה מרק?"},
-  {re:/network|נטוורק/i, q:"'נטוורק', זעמה יש לך הרבה חברים? תגיד חברים."},
-  {re:/growth|scal|סקייל|גרות'/i, q:"'סקייל', 'גרות''... יא רבּי, תגיד גדלת, נגמר."},
+  {re:/network|נטוורק/i, q:"'נטוורק', זעמה יש לך הרבה חברים? תגידי חברים."},
+  {re:/growth|scal|סקייל|גרות'/i, q:"'סקייל', 'גרות''... יא רבּי, תגידי גדלת, נגמר."},
   {re:/value|ואליו/i, q:"'ואליו' זה ערך. יש לך מילה בעברית, למה להסתתר?"}
 ];
 
@@ -229,19 +230,19 @@ const PAREN=[
   "מילה ותרגום שלה בסוגריים זה חוזר על עצמו. תשאירי אחת, זה יזרום טוב יותר."
 ];
 const THREADS=[
-  "את ה🧵 וה'מי שמבין יבין' תוריד. זה לא סוד, זה פוסט.",
-  "'שתפו' ו♻️? חמוד, אם זה טוב אנשים ישתפו לבד. אל תתחנן."
+  "את ה🧵 וה'מי שמבין יבין' תורידי. זה לא סוד, זה פוסט.",
+  "'שתפו' ו♻️? חמודה, אם זה טוב אנשים ישתפו לבד. אל תתחנני."
 ];
-const EMOJINUM=["ותוריד את הספרות-אימוג'י האלה, זה פוסט, לא כפתורים במעלית."];
+const EMOJINUM=["ותורידי את הספרות-אימוג'י האלה, זה פוסט, לא כפתורים במעלית."];
 const HOOK=[
-  "וואלה, פתחת חזק. מספר אחד גדול ומיד אני חייבת לדעת מה קרה. <b>תשאיר בדיוק ככה.</b>",
+  "וואלה, פתחת חזק. מספר אחד גדול ומיד אני חייבת לדעת מה קרה. <b>תשאירי בדיוק ככה.</b>",
   "פתיחה יפה, מספר שמפחיד כמו שצריך. ככה תופסים אותי."
 ];
 const NAMES=[
-  "אתה מתחיל לזרוק שמות. אחד-שניים בסדר, יותר מזה ואתה נשמע מתרברב במקום משכנע.",
-  "עוד שם גדול. תיזהר, נשמה, שלא תישמע כאילו אתה מנסה להרשים במקום לספר."
+  "את מתחילה לזרוק שמות. אחד-שניים בסדר, יותר מזה ואת נשמעת מתרברבת במקום משכנעת.",
+  "עוד שם גדול. תיזהרי, נשמה, שלא תישמעי כאילו את מנסה להרשים במקום לספר."
 ];
-const BUZZTAIL=[" תגיד את זה במילים של בן אדם."," מה זו המילה הגדולה הזאת?"," דברי פשוט, יישמע חכם יותר."];
+const BUZZTAIL=[" תגידי את זה במילים של בן אדם."," מה זו המילה הגדולה הזאת?"," דברי פשוט, יישמע חכם יותר."];
 const HEBRISH=[
   "<b>עזוב אותי מההיבריש.</b> חצי עברית חצי אנגלית באותה שורה, תחליט על שפה אחת. או הכל עברית או הכל אנגלית, לא סלט.",
   "שוב היבריש. אתה מזגזג בין השפות באמצע משפט וזה מבלבל. תבחר אחת ותישאר בה.",
@@ -256,8 +257,8 @@ const QUESTION=[
   "יפה ששאלת בסוף, זה פותח שיחה. כל הכבוד."
 ];
 const HUMAN=[
-  "<b>כפרה עליך</b>, פה דיברת פשוט ונכון. הבנתי מיד. תשאיר בדיוק ככה.",
-  "את זה הבנתי מהמילה הראשונה. כתוב כמו בן אדם, לא כמו רובוט. תשאיר.",
+  "<b>כפרה עליך</b>, פה דיברת פשוט ונכון. הבנתי מיד. תשאירי בדיוק ככה.",
+  "את זה הבנתי מהמילה הראשונה. כתבת כמו בן אדם, לא כמו רובוט. תשאירי.",
   "יא בינתי, פה נגעת. פשוט וברור, בלי פוזה. זה נשאר בראש."
 ];
 
@@ -285,45 +286,45 @@ const BRAND=/^(JPMorgan|MarketWatch|Magnificent|Menlo|Sequoia|Nvidia|Goldman|Blo
 const NAMEDROP=/JPMorgan|MarketWatch|Magnificent|Menlo|Sequoia|Nvidia|Goldman|Bloomberg|Reuters|Morgan|Gartner/i;
 
 const OPENING=[
-  "פתיחה סבירה, אבל לא תופסת בגרון. תן משפט ראשון שעוצר את הגלילה.",
-  "התחלה רגילה. בשנייה הראשונה מחליטים אם להישאר, תן סיבה.",
-  "הפתיחה חמימה, אבל איטית. תיכנס ישר לעניין, בלי חימום.",
+  "פתיחה סבירה, אבל לא תופסת בגרון. תני משפט ראשון שעוצר את הגלילה.",
+  "התחלה רגילה. בשנייה הראשונה מחליטים אם להישאר, תני סיבה.",
+  "הפתיחה חמימה, אבל איטית. תיכנסי ישר לעניין, בלי חימום.",
   "משפט ראשון בלי ניצוץ. פה מרוויחים או מאבדים את הקורא."
 ];
 const CLOSING=[
-  "הסיום קצת שטוח. תסגור בשאלה או במשפט שנשאר בראש.",
-  "השורה האחרונה חלשה. פה מחליטים אם להגיב, תן פאנץ'.",
-  "סיום בסדר, אבל לא מזמין תגובה. תשאיר להם מחשבה.",
-  "פה נגמר לך האוויר. תן משפט אחרון חד יותר."
+  "הסיום קצת שטוח. תסגרי בשאלה או במשפט שנשאר בראש.",
+  "השורה האחרונה חלשה. פה מחליטים אם להגיב, תני פאנץ'.",
+  "סיום בסדר, אבל לא מזמין תגובה. תשאירי להם מחשבה.",
+  "פה נגמר לך האוויר. תני משפט אחרון חד יותר."
 ];
 const LONG=[
-  "משפט ארוך, נגמר לי האוויר באמצע. תחתוך אותו לשניים.",
-  "יותר מדי מילים בשורה אחת. תזרוק חצי, המסר יתחזק.",
-  "פסקה שלמה בנשימה אחת. תן לקורא לנשום, תפצל.",
+  "משפט ארוך, נגמר לי האוויר באמצע. תחתכי אותו לשניים.",
+  "יותר מדי מילים בשורה אחת. תזרקי חצי, המסר יתחזק.",
+  "פסקה שלמה בנשימה אחת. תני לקורא לנשום, תפצלי.",
   "ארוך מדי. כל מילה מיותרת מחלישה את מה שכן חשוב."
 ];
 const NUMBER=[
   "מספר קונקרטי במקום הבטחות, זה משכנע. יפה.",
   "נתון אמיתי, מזיאן. זה מה שגורם לעצור.",
   "מספר במקום דיבורים. ככה בונים אמון.",
-  "יפה שהבאת נתון, זה נותן משקל למה שאתה אומר."
+  "יפה שהבאת נתון, זה נותן משקל למה שאת אומרת."
 ];
 const PUNCHY=[
-  "קצר וחד. ככה אוהבים, תשאיר.",
+  "קצר וחד. ככה אוהבים, תשאירי.",
   "משפט קצר שמכה. יפה.",
-  "כפרה עליך, פה דיברת פשוט ונכון. תשאיר בדיוק ככה.",
-  "שורה נקייה בלי שומן. מזיאן, אל תיגע בה.",
-  "קצר, אנושי, ישר ללב. תשאיר.",
+  "כפרה עליך, פה דיברת פשוט ונכון. תשאירי בדיוק ככה.",
+  "שורה נקייה בלי שומן. מזיאן, אל תיגעי בה.",
+  "קצר, אנושי, ישר ללב. תשאירי.",
   "פשוט וברור. פה לא הלכת לאיבוד, כל הכבוד."
 ];
 const IMPROVE=[
-  "הרעיון ברור, אבל אתה מסביר יותר מדי. סמוך על הקורא ותקצר.",
-  "בסדר, אבל זה 'מספר' במקום 'מראה'. תן דוגמה קטנה במקום להכריז.",
-  "מובן, אבל קצת שגרתי. איפה הרגש? תכניס משהו אישי.",
-  "טוב, אבל את זה אתה אומר בערך שוב בהמשך. תבחר מקום אחד.",
-  "עובד, אבל בטון של הרצאה. דבר איתי, לא אליי.",
-  "בסדר, אבל אפשר לחדד. איזו מילה אחת מיותרת פה, תמצא אותה.",
-  "יפה, אבל צפוי. תפתיע אותי, אחרת אני גוללת הלאה."
+  "הרעיון ברור, אבל את מסבירה יותר מדי. סמכי על הקורא ותקצרי.",
+  "בסדר, אבל זה 'מספר' במקום 'מראה'. תני דוגמה קטנה במקום להכריז.",
+  "מובן, אבל קצת שגרתי. איפה הרגש? תכניסי משהו אישי.",
+  "טוב, אבל את זה את אומרת בערך שוב בהמשך. תבחרי מקום אחד.",
+  "עובד, אבל בטון של הרצאה. דברי איתי, לא אליי.",
+  "בסדר, אבל אפשר לחדד. איזו מילה אחת מיותרת פה, תמצאי אותה.",
+  "יפה, אבל צפוי. תפתיעי אותי, אחרת אני גוללת הלאה."
 ];
 const OKAY=[
   "השורה הזאת עובדת, ברורה ובמקום.",
@@ -333,7 +334,7 @@ const OKAY=[
 ];
 const CTABAIT=[
   "זה קצת דיג לתגובות. אם הפוסט טוב, אנשים יגיבו לבד, נשמה.",
-  "'תכתבו בתגובות'? חמוד, אל תתחנן לתגובות. תן ערך והם יבואו."
+  "'תכתבו בתגובות'? חמודה, אל תתחנני לתגובות. תני ערך והם יבואו."
 ];
 const DRY=[
   "ודבר אחרון, וזה הכי חשוב: הפוסט הזה יבש. יבש כמו טוסט בלי חמאה. סיפרת לי עובדות, אבל לא סיפרת לי אותך. איפה את בכל זה? תני לי רגע אחד אמיתי מהחיים, אחרת אף אחד לא יזכור מזה כלום.",
@@ -407,26 +408,34 @@ function analyze(text){
   const reads = t.length>600 ? "קראתי שלוש פעמים ונשבר לי הראש." : "קראתי פעמיים.";
   let sum, opener;
   if(lang==='en'){
-    opener = `שמע חמוד, ${reads} אנגלית? יא בינתי, גם אני יודעת אנגלית, אין בעיה. עכשיו נראה אם זה ברור.`;
+    opener = `שמעי חמודה, ${reads} אנגלית? יא בינתי, גם אני יודעת אנגלית, אין בעיה. עכשיו נראה אם זה ברור.`;
     if(badN>=3) sum="יש פה יותר מדי באזוורדס, גם באנגלית זה נשמע מנופח.";
-    else if(badN===0) sum="כתוב נקי, יפה. אבל אל תתלהב, סימנתי לך כמה שורות לחדד. בוא נעבור.";
+    else if(badN===0) sum="כתוב נקי, יפה. אבל אל תתלהבי, סימנתי לך כמה שורות לחדד. בואי נעבור.";
     else sum="יש פה גרעין טוב, רק צריך לנקות קצת.";
   } else {
-    opener = `תשמע חביבי, ${reads}`;
-    if(badN>=3) sum="יש פה פוסט חכם, אבל יש כמה דברים שצריך לתקן. בוא נעבור עליהם.";
-    else if(badN===0) sum="ויא בינתי, הבנתי, כתוב יפה. אבל אל תתלהב, יש כמה שורות לחדד. בוא נעבור עליהן.";
+    opener = `תשמעי חביבתי, ${reads}`;
+    if(badN>=3) sum="יש פה פוסט חכם, אבל יש כמה דברים שצריך לתקן. בואי נעבור עליהם.";
+    else if(badN===0) sum="ויא בינתי, הבנתי, כתבת יפה. אבל אל תתלהבי, יש כמה שורות לחדד. בואי נעבור עליהן.";
     else sum="יש פה גרעין ממש טוב, רק חבל שהוא קצת מתחבא.";
   }
-  const intro=`${opener} ${sum}`;
+  const clearL = lines.find(l => l.replace(/[^֐-׿A-Za-z]/g,'').length>=12 && !/⃣/.test(l)) || lines[0] || '';
+  const cand = clearL.length>84 ? clearL.slice(0,82).trim()+'…' : clearL;
+  let reflect;
+  if(dry || badN>=3 || !cand){
+    reflect = "ותכל'ס? בקושי הבנתי מה את מנסה להגיד פה, ופה בדיוק הבעיה.";
+  } else {
+    reflect = `מה שהבנתי שאת מנסה להגיד: "${cand}". אם לא לזה כיוונת, הפוסט פספס.`;
+  }
+  const intro=`${opener} ${reflect} ${sum}`;
 
   let verdict, vlabel;
-  if(badN===0 && warnN<=2){ verdict='pub'; vlabel='✅ תפרסם'; }
-  else if(badN>=3 && goodN===0){ verdict='no'; vlabel='❌ אל תפרסם'; }
-  else { verdict='fix'; vlabel='🟡 תתקן'; }
+  if(badN===0 && warnN<=2){ verdict='pub'; vlabel='✅ תפרסמי'; }
+  else if(badN>=3 && goodN===0){ verdict='no'; vlabel='❌ אל תפרסמי'; }
+  else { verdict='fix'; vlabel='🟡 תתקני'; }
   const CLOSERS={
-    pub:[" ולך תאכל משהו כבר.", " יאללה, ותשתה כוס תה אחרי.", " ותתקשר לאמא, כבר שבוע לא שמעה ממך.", " מזיאן, אני גאה בך."],
-    fix:[" עבור על מה שסימנתי, שוינא שוינא.", " תסדר את הצהובים ואתה בשוק.", " עוד ליטוש קטן וזה עף, נשמה.", " כמעט שם, אל תתעצל על הסוף."],
-    no:[" כתוב מחדש בשפה אחת, כמו בן אדם. תבורך.", " תתחיל מהתחלה, בלי פוזות. אני מאמינה בך.", " לפח, ותכתוב שוב מהלב.", " שב, נשום, ותכתוב כמו שאתה מדבר איתי."]
+    pub:[" ולכי תאכלי משהו כבר.", " יאללה, ותשתי כוס תה אחרי.", " ותתקשרי לאמא, כבר שבוע לא שמעה ממך.", " מזיאן, אני גאה בך."],
+    fix:[" עברי על מה שסימנתי, שוויה שוויה, ולכי תאכלי משהו.", " תסדרי את הצהובים ואת בשוק, ותאכלי משהו.", " עוד ליטוש קטן וזה עף, נשמה.", " כמעט שם, אל תתעצלי על הסוף."],
+    no:[" תכתבי מחדש בשפה אחת, כמו בן אדם. תבורכי.", " תתחילי מהתחלה, בלי פוזות. אני מאמינה בך.", " לפח, ותכתבי שוב מהלב.", " שבי, נשמי, ותכתבי כמו שאת מדברת איתי."]
   };
   return {intro, rows:kept, verdict, vlabel:vlabel+pick(CLOSERS[verdict])};
 }
@@ -440,7 +449,7 @@ function render(){
   if(r.empty){
     intro.textContent="נשמה, לא הדבקת כלום. מה אני אמורה לקרוא, את המחשבות שלך?";
     linesEl.innerHTML="";
-    v.textContent="🟡 קודם תכתוב משהו";
+    v.innerHTML='<span class="vemoji">🟡</span>קודם תכתבי משהו';
     v.className="verdict v-fix";
     box.classList.add('show'); return;
   }
@@ -451,7 +460,8 @@ function render(){
       +`<div class="q">"${esc(row.line)}"<span class="tagword ${row.tag}">${tw}</span></div>`
       +`<div class="c">${row.note}</div></div></div>`;
   }).join("");
-  v.textContent=r.vlabel;
+  { const mm=r.vlabel.match(/^(\S+)\s([\s\S]*)$/);
+    v.innerHTML = mm ? `<span class="vemoji">${mm[1]}</span>${esc(mm[2])}` : esc(r.vlabel); }
   v.className="verdict "+(r.verdict==='pub'?'v-pub':r.verdict==='no'?'v-no':'v-fix');
   box.classList.add('show');
   box.scrollIntoView({behavior:'smooth',block:'nearest'});
